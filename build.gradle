@@ -1,0 +1,42 @@
+apply plugin: 'application'
+apply plugin: 'idea'
+
+mainClassName = 'org.alexdev.duckhttpd.Main'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/plugins-release' }
+}
+
+dependencies {
+// https://mvnrepository.com/artifact/org.restlet.jee/org.restlet
+    compile group: 'org.restlet.jee', name: 'org.restlet', version: '2.1.1'
+
+
+    // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '2.7.4'
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-configuration2
+    implementation group: 'org.apache.commons', name: 'commons-configuration2', version: '2.2'
+
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
+
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.6.1'
+
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+
+}
+
+// Create fat jar with libraries inside of it.
+task fatJar(type: Jar) {
+    zip64 true
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    baseName = project.name + '-all'
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

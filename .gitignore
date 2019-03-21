@@ -1,0 +1,14 @@
+.gradle/
+.idea/
+/out/
+**.iml
+/gradle/
+/build/
+bin/
+tmp/
+
+/resources/
+/cache/
+imager.zip
+/badge/
+/imaging/
