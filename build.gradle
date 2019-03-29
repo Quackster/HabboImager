@@ -1,7 +1,7 @@
 apply plugin: 'application'
 apply plugin: 'idea'
 
-mainClassName = 'org.alexdev.duckhttpd.Main'
+mainClassName = 'wf.arcturus.Imager'
 
 repositories {
     mavenCentral()
